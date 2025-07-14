@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API } from "@/api/api";
 
 function AdminOrderTable() {
   const [orders, setOrders] = useState([]);
@@ -12,8 +13,8 @@ function AdminOrderTable() {
     try {
       setError(null);
       setLoading(true);
-      const { data } = await axios.get(
-        `http://localhost:8000/api/v1/orders/get-all-orders-of-admin?page=${page}&limit=5`
+      const { data } = await API.get(
+        `orders/get-all-orders-of-admin?page=${page}&limit=5`
       );
       const { data: myData } = data;
       // console.log(myData)
@@ -37,8 +38,8 @@ function AdminOrderTable() {
     try {
         setError(null);
         setLoading(true);
-      const { data } = await axios.put(
-        `http://localhost:8000/api/v1/orders/process-order/${orderId}`
+      const { data } = await API.put(
+        `orders/process-order/${orderId}`
       );
       const { data: myData } = data;
       console.log(myData);
@@ -54,8 +55,8 @@ function AdminOrderTable() {
     setError(null);
     setLoading(true);
     try {
-      const { data } = await axios.delete(
-        `http://localhost:8000/api/v1/orders/delete-order/${orderId}`
+      const { data } = await API.delete(
+        `orders/delete-order/${orderId}`
       );
       const { data: myData } = data;
       console.log(myData);

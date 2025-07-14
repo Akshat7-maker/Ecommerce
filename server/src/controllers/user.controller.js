@@ -147,7 +147,7 @@ const changeAdmin = asyncHandler(async (req, res, next) => {
 });
 
 const editProfile = asyncHandler(async (req, res, next) => {
-    const {userId} = req.params
+    let userId = req.user._id
     console.log(userId)
   const { name, email, oldpassword, newpassword, gender } = req.body;
 

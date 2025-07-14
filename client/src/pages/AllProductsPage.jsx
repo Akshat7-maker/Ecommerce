@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import api from "@/api/api";
 import { myCartActions } from "@/store/myCartSlice";
 import toast from "react-hot-toast";
+import { API } from "@/api/api";
 
 function AllProductsPage() {
   const { user } = useSelector((state) => state.auth);
@@ -21,6 +22,7 @@ function AllProductsPage() {
   const [priceSort, setPriceSort] = useState("");
   const [category, setCategory] = useState("");
   const [getCategories, setgetCategories] = useState([])
+  
 
 
   const fetchProducts = async () => {
@@ -30,7 +32,7 @@ function AllProductsPage() {
     if (priceSort || category) {
       url = `http://localhost:8000/api/v1/products/get-filter-products?pricesort=${priceSort}&category=${category}&page=${page}&limit=5`;
     }
-    const { data } = await axios(url);
+    const { data } = await API.get(url);
 
     const { data: products } = data;
 
@@ -42,7 +44,7 @@ function AllProductsPage() {
   };
 
   const fetchCategories = async () => {
-    const { data } = await axios("http://localhost:8000/api/v1/products/get-categories");
+    const { data } = await API.get("http://localhost:8000/api/v1/products/get-categories");
     const { data: categories } = data;
     console.log(categories);
     setgetCategories(categories)
@@ -65,7 +67,7 @@ function AllProductsPage() {
 
   const addToCart = async (product) => {
     await withLoader(async () => {
-      const cart = await api.addToCart(user._id, product._id);
+      const cart = await api.addToCart( product._id);
       console.log("added to cart ", cart);
       if (cart) {
         dispatch(myCartActions.setCart(cart));

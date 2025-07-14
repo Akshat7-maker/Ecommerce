@@ -5,6 +5,10 @@ import isAdmin from "../middlewares/admin.middleware.js";
 
 const router = Router();
 
+
+router.use(verifyUser)
+router.use(isAdmin)
+
 router.route("/get-all-stats").get( allStatsControllers.getDashboardStats);
 router.route("/get-pie-chart-data").get( allStatsControllers.getPieChart);
 

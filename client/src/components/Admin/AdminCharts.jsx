@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { DoughnutChart } from './AdminDashboardUi.jsx/Charts'
 import useLoader from '@/customHooks/loader'
 import axios from 'axios'
+import { API } from '@/api/api'
 
 
 function AdminCharts() {
@@ -12,7 +13,7 @@ function AdminCharts() {
 
     const getData = async () => {
         await withLoader(async () => {
-            const { data } = await axios.get('http://localhost:8000/api/v1/stats/get-pie-chart-data')
+            const { data } = await API.get('stats/get-pie-chart-data')
             const { data: pieData } = data
             setPieChart(pieData)
         })

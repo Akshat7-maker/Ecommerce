@@ -8,6 +8,7 @@ import api from '@/api/api'
 import Loader from './Loader'
 import { myCartActions } from '../store/myCartSlice'
 import toast from 'react-hot-toast'
+import { API } from '@/api/api'
 
 
 
@@ -69,7 +70,7 @@ export default function PaymentPage() {
         // Handle payment logic here
         try {
             // create order in backend
-            const { data } = await axios.post('http://localhost:8000/api/v1/payments/create-order', {
+            const { data } = await API.post('payments/create-order', {
                 amount: totalAmount,
                 currency: 'INR',
             })
@@ -95,7 +96,7 @@ export default function PaymentPage() {
 
                   try {
                     // 1. check payment status in backend
-                    const { data } = await axios.post('http://localhost:8000/api/v1/payments/verify-payment', paymentDetails);
+                    const { data } = await API.post('payments/verify-payment', paymentDetails);
                     console.log( "data",data);
                     const { success } = data;
                     console.log("success",success);
@@ -115,7 +116,7 @@ export default function PaymentPage() {
                             paymentStatus : 'completed',
                             user: user._id
                           });
-                        const { data } = await axios.post('http://localhost:8000/api/v1/orders/create-order', {
+                        const { data } = await API.post('orders/create-order', {
                             paymentDetails,
                             shippingInfo,
                             orderItems,

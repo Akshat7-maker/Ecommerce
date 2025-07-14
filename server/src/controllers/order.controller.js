@@ -106,8 +106,8 @@ const createOrder = asyncHandler(async (req, res, next) => {
 
 // get my orders
 const myOrder = asyncHandler(async (req, res, next) => {
-    const { userId } = req.params
-    // console.log(userId);
+    const userId  = req.user._id
+    console.log(userId);
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5 ;
 
@@ -139,7 +139,7 @@ const myOrder = asyncHandler(async (req, res, next) => {
 });
 
 const getRecentOrders = asyncHandler(async (req, res, next) => {
-    const { userId } = req.params
+    const  userId  = req.user._id;
 
     const totalOrders = await Order.countDocuments({ user: userId });
     const orders = await Order.find({ user: userId })

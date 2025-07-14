@@ -1,18 +1,32 @@
 import axios from "axios";
 
 
-const API = axios.create({
+export const API = axios.create({
     baseURL:"http://localhost:8000/api/v1",
-    // withCredentials: true
+    withCredentials: true
 });
 
-// API.defaults.withCredentials = true;
+// function to set Authorization header
+const setAuthHeader = (token) => {
+    if(token) {
+        API.defaults.headers.common["Authorization"] = `Bearer ${token}`
+    }else {
+        delete API.defaults.headers.common["Authorization"];
+    }
+}
+
 // user login
 const login = async (email, password) => {
     try {
         const {data} = await API.post("/users/login", {email, password});
 
         const {data:user} = data
+
+        // store token in local storage
+        localStorage.setItem("token", user.refreshToken)
+
+        // set auth header
+        setAuthHeader(user.refreshToken)
         return user;
     } catch (error) {
         throw error
@@ -87,9 +101,9 @@ const getAllReviews = async (id) => {
 
 // get user review for a particular product
 
-const getUserReview = async (productId,userId) => {
+const getUserReview = async (productId) => {
     try {
-        const {data} = await API.get(`/reviews/get-review-of-user/${productId}/${userId}`);
+        const {data} = await API.get(`/reviews/get-review-of-user/${productId}`);
         const {data:review} = data
         return review
     } catch (error) {
@@ -98,9 +112,9 @@ const getUserReview = async (productId,userId) => {
 }
 
 // create review
-const createReview = async (productId,userId, rating, comment) => {
+const createReview = async (productId, rating, comment) => {
     try {
-        const {data} = await API.post(`/reviews/create-review/${productId}/${userId}`, {rating, comment});
+        const {data} = await API.post(`/reviews/create-review/${productId}`, {rating, comment});
         const {data:review} = data
         return review
     } catch (error) {
@@ -109,9 +123,9 @@ const createReview = async (productId,userId, rating, comment) => {
 }
 
 // update review
-const updateReview = async (reviewId,userId, rating, comment) => {
+const updateReview = async (reviewId, rating, comment) => {
     try {
-        const {data} = await API.put(`/reviews/update-review/${reviewId}/${userId}`, {rating, comment});
+        const {data} = await API.put(`/reviews/update-review/${reviewId}`, {rating, comment});
         const {data:review} = data
         return review
     } catch (error) {
@@ -130,9 +144,9 @@ const deleteReview = async (reviewId) => {
     }
 }
 
-const getAllOrders = async (userId,page, limit) => {
+const getAllOrders = async (page, limit) => {
     try {
-        const {data} = await API.get(`/orders/my-order/${userId}`,
+        const {data} = await API.get(`/orders/my-order/`,
         {
             params: {
                 page: page,
@@ -173,9 +187,9 @@ const getAllOrdersOfAdmin = async () => {
 }
 
 // get cart
-const getCart = async (userId) => {
+const getCart = async () => {
     try {
-        const {data} = await API.get(`/cart/get-cart/${userId}`);
+        const {data} = await API.get("/cart/get-cart");
         const {data:cart} = data
         // console.log("cart",cart);
         return cart
@@ -185,9 +199,9 @@ const getCart = async (userId) => {
 }
 
 // reset cart
-const resetCart = async (userId) => {
+const resetCart = async () => {
     try {
-        const {data} = await API.delete(`/cart/reset-cart/${userId}`);
+        const {data} = await API.delete("/cart/reset-cart");
         const {data:cart} = data
         return cart
     } catch (error) {
@@ -196,9 +210,9 @@ const resetCart = async (userId) => {
 }
 
 // add to cart
-const addToCart = async (userId, productId, quantity=1) => {
+const addToCart = async ( productId, quantity=1) => {
     try {
-        const {data} = await API.post(`/cart/add-to-cart/${userId}`, {productId, quantity});
+        const {data} = await API.post(`/cart/add-to-cart`, {productId, quantity});
         const {data:cart} = data
         return cart
     } catch (error) {
@@ -207,9 +221,9 @@ const addToCart = async (userId, productId, quantity=1) => {
 }
 
 // delete from cart
-const deleteFromCart = async (userId, productId) => {
+const deleteFromCart = async (productId) => {
     try {
-        const {data} = await API.delete(`/cart/delete-from-cart/${userId}/${productId}`);
+        const {data} = await API.delete(`/cart/delete-from-cart/${productId}`);
         const {data:cart} = data
         return cart
     } catch (error) {
@@ -218,9 +232,9 @@ const deleteFromCart = async (userId, productId) => {
 }
 
 // remove from cart
-const removeFromCart = async (userId, productId) => {
+const removeFromCart = async (productId) => {
     try {
-        const {data} = await API.patch(`/cart/remove-from-cart/${userId}/${productId}`);
+        const {data} = await API.patch(`/cart/remove-from-cart/${productId}`);
         const {data:cart} = data
         return cart
     } catch (error) {

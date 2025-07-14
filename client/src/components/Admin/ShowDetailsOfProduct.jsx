@@ -6,6 +6,7 @@ import Loader from "../Loader";
 import { Edit, Trash2 } from "lucide-react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { API } from "../../api/api";
 
 
 function ShowDetailsOfProduct() {
@@ -25,8 +26,8 @@ function ShowDetailsOfProduct() {
 
   const onDelete = async (id) => {
     await withLoader(async () => {
-      const deleted = await axios.delete(
-        `http://localhost:5000/api/v1/products/${id}`
+      const deleted = await API.delete(
+        `products/${id}`
       );
       console.log("deleted", deleted);
 

@@ -4,6 +4,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
+import { API } from '@/api/api';
+
 
 function AdminForm({product}) {
     const { register, handleSubmit, formState: { errors }} = useForm({

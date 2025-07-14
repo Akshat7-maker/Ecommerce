@@ -65,7 +65,7 @@ function CartPage() {
   // add to cart
   const addToCart = async (productId, quantity) => {
     await withLoader(async () => {
-      const cart = await api.addToCart(user._id, productId, quantity);
+      const cart = await api.addToCart( productId, quantity);
       console.log("added to cart ", cart);
       if (cart) {
         dispatch(myCartActions.setCart(cart));
@@ -78,7 +78,7 @@ function CartPage() {
   // remove from cart
   const removeFromCart = async (cartitem) => {
     await withLoader(async () => {
-      const cart = await api.removeFromCart(user._id, cartitem);
+      const cart = await api.removeFromCart( cartitem);
       console.log("removed from cart ", cart);
       if (cart) {
         dispatch(myCartActions.setCart(cart));
@@ -91,7 +91,7 @@ function CartPage() {
   // delete from cart
   const deleteFromCart = async (cartitem) => {
     await withLoader(async () => {
-      const cart = await api.deleteFromCart(user._id, cartitem);
+      const cart = await api.deleteFromCart( cartitem);
       console.log("deleted from cart ", cart);
       if (cart) {
         dispatch(myCartActions.setCart(cart));
@@ -157,7 +157,7 @@ function CartPage() {
                 removeFromCart={removeFromCart}
                 deleteFromCart={deleteFromCart}
               />
-            ))}
+            ))} 
           </div>
           {/* total amount and quantity */}
 

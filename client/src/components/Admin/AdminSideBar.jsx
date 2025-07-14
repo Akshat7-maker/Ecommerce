@@ -1,15 +1,15 @@
 import React from "react";
-import { Home, User, Settings, BarChart, LogOut, Plus,ShoppingCart  } from "lucide-react";
+import { Home, User, Settings, BarChart, LogOut, Plus, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
 
   const adminPanelLinks = [
     { label: "Dashboard", icon: <Home className="w-5 h-5" />, to: "/admin-panel" },
-    { label: "Users", icon: <User  className="w-5 h-5"/>, to: "/admin-panel/users" },
+    { label: "Users", icon: <User className="w-5 h-5" />, to: "/admin-panel/users" },
     { label: "Products", icon: <ShoppingCart className="w-5 h-5" />, to: "/admin-panel/products" },
     { label: "Orders", icon: <Settings className="w-5 h-5" />, to: "/admin-panel/orders" },
-    {label: "Charts", icon: <BarChart className="w-5 h-5" />, to: "/admin-panel/charts"},
+    { label: "Charts", icon: <BarChart className="w-5 h-5" />, to: "/admin-panel/charts" },
     { label: "Add Product", icon: <Plus className="w-5 h-5" />, to: "/admin-panel/add-product" },
   ];
   return (

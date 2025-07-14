@@ -1,6 +1,7 @@
 import useLoader from '@/customHooks/loader';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { API } from '@/api/api';
 
 function AdminUserTable() {
     const [users, setUsers] = useState([]);
@@ -8,7 +9,7 @@ function AdminUserTable() {
 
     const fetchUsers = async () => {
         await withLoader(async () => {
-            const {data} = await axios.get('http://localhost:8000/api/v1/users/get-all-users');
+            const {data} = await API.get('users/get-all-users');
             const {data:users} = data
             setUsers(users)
         });
@@ -19,6 +20,7 @@ function AdminUserTable() {
     }, []);
 
     if (loading) {
+      console.log("loading.............", loading);
         return <div>Loading...</div>;
     }
 
@@ -27,6 +29,7 @@ function AdminUserTable() {
     }
     return (
         <div className="p-6 bg-gray-100 min-h-screen">
+          {console.log("loding inside component", loading)}
           <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg">
             <h2 className="text-2xl font-bold text-gray-800 p-6 border-b">Users</h2>
             <div className="overflow-x-auto">

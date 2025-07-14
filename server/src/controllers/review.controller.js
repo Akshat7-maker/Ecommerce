@@ -6,7 +6,8 @@ import { Product } from "../models/product.model.js";
 
 // create review
 const createReview = asyncHandler(async (req, res, next) => {
-  const { productId,userId } = req.params;
+  const { productId } = req.params;
+  const userId = req.user._id
   const { rating, comment } = req.body;
 
   console.log(rating, comment);
@@ -75,7 +76,8 @@ const getAllReviews = asyncHandler(async (req, res, next) => {
 
 // get a single review
 const getReviewOfUser = asyncHandler(async (req, res, next) => {
-  const { productId,userId } = req.params;
+  const { productId} = req.params;
+  const userId = req.user._id
 
   if (!productId) {
     throw new ApiError(400, "Please provide a product id");
@@ -98,8 +100,9 @@ const getReviewOfUser = asyncHandler(async (req, res, next) => {
 
 // update review
 const updateReview = asyncHandler(async (req, res, next) => { 
-  const { reviewid, userId } = req.params;
+  const { reviewid} = req.params;
   const { rating, comment } = req.body;
+  const userId = req.user._id
 
   if (!rating && !comment) {
     throw new ApiError(400, "Please fill at least one of the fields");

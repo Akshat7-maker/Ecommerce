@@ -20,7 +20,7 @@ export default function MyOrderPage() {
   const getOrders = async () => {
     try {
       setLoading(true);
-      const myData = await api.getAllOrders(user._id, page);
+      const myData = await api.getAllOrders(page);
       console.log(myData);
       if (myData) {
         setOrders(myData.orders);

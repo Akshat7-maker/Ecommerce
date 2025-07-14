@@ -2,7 +2,7 @@ import React from "react";
 import ProductGrid from "../ProductGrid";
 import Loader from "../Loader";
 import { useEffect, useState } from "react";
-import api from "../../api/api";
+import api, { API } from "../../api/api";
 import useLoader from "@/customHooks/loader";
 import AdminProductItem from "./AdminProductItem";
 import axios from "axios";
@@ -26,9 +26,9 @@ function AdminProducts() {
   // }
 
   const fetchProducts = async () => {
-    let url = `http://localhost:8000/api/v1/products/get-all-products?page=${page}&limit=4`;
+    let url = `products/get-all-products?page=${page}&limit=4`;
 
-    const { data } = await axios(url);
+    const { data } = await API.get(url);
 
     const { data: products } = data;
 
@@ -44,10 +44,10 @@ function AdminProducts() {
     fetchProducts();
   }, [page]);
 
-  if (loading) return <Loader />;
+  if (loading) return <div>Loding ...</div>;
   if (error) return <div>{error}</div>;
 
-  if (products.length === 0) return <div>No products found</div>;
+  if (products.length === 0 && loading) return <div>No products found</div>;
 
   return (
     <>

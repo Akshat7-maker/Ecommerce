@@ -20,7 +20,7 @@ function ProductItem({ product }) {
     // dispatch(cartActions.addToCart({...product, quantity: 1}));
     try {
       setIsDisabled(true);
-      const cart = await api.addToCart(user._id, product._id);
+      const cart = await api.addToCart( product._id);
       if (cart) {
         toast.success("Product added from cart");
         dispatch(myCartActions.setCart(cart));

@@ -7,7 +7,7 @@ import e from "express";
 
 // get cart
 const getCart = asyncHandler(async (req, res, next) => {
-  const { userId } = req.params;
+  const  userId  = req.user._id;
   // console.log(userId);
 
   if (!userId) {
@@ -38,7 +38,7 @@ const getCart = asyncHandler(async (req, res, next) => {
 
 // add to cart
 const addToCart = asyncHandler(async (req, res, next) => {
-  const {userId} = req.params
+  const userId = req.user._id
   const { productId, quantity } = req.body;
   console.log(userId, productId, quantity);
   if(!userId) {
@@ -156,7 +156,9 @@ const addToCart = asyncHandler(async (req, res, next) => {
 
 // delete from cart
 const deleteFromCart = asyncHandler(async (req, res, next) => {
-  const { productId, userId } = req.params;
+  const { productId} = req.params;
+  const userId = req.user._id
+
   console.log(userId, productId);
 
   if (!productId) {
@@ -264,7 +266,9 @@ const deleteFromCart = asyncHandler(async (req, res, next) => {
 
 // remove from cart
 const removeFromCart = asyncHandler(async (req, res, next) => {
-  const { productId, userId } = req.params;
+  const { productId} = req.params;
+  const userId = req.user._id
+
   console.log(userId, productId);
 
   if (!productId) {
@@ -317,7 +321,7 @@ const removeFromCart = asyncHandler(async (req, res, next) => {
 
 // reset cart
 const resetCart = asyncHandler(async (req, res, next) => {
-  const { userId } = req.params;
+  const  userId  = req.user._id;
   const cart = await Cart.findOneAndDelete({ user: userId });
   if (!cart) {
     throw new ApiError(404, "Cart not found");

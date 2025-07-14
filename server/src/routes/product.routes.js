@@ -16,7 +16,7 @@ router.route("/get-latest-products").get(allProductControllers.getLatestProducts
 router.route("/get-filter-products").get(allProductControllers.filterProducts)
 
 // only admin can create a product
-router.route("/create-product").post( upload.fields([
+router.route("/create-product").post(verifyUser, isAdmin, upload.fields([
     {
         name: "coverPic",
         maxCount: 1

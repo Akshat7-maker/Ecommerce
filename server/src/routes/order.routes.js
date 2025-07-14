@@ -1,19 +1,23 @@
 import { Router } from "express";
 import allOrderControllers from "../controllers/order.controller.js";
 import verifyUser from "../middlewares/auth.middlewares.js";
+import isAdmin from "../middlewares/admin.middleware.js";
 
 const router = Router();
 
 
+router.use(verifyUser)
+
+
 router.route("/create-order").post( allOrderControllers.createOrder);
-router.route("/my-order/:userId").get( allOrderControllers.myOrder);
+router.route("/my-order").get( allOrderControllers.myOrder);
 router.route("/get-order/:orderId").get( allOrderControllers.getOrderById);
-router.route("/get-all-orders-of-admin").get( allOrderControllers.getAllOrdersOfAdmin);
-router.route("/get-recent-orders/:userId").get( allOrderControllers.getRecentOrders);
-router.route("/get-recent-orders-of-admin").get( allOrderControllers.getRecentOrdersOfAdmin);
+router.route("/get-recent-orders").get( allOrderControllers.getRecentOrders);
+router.route("/get-all-orders-of-admin").get(isAdmin, allOrderControllers.getAllOrdersOfAdmin);
+router.route("/get-recent-orders-of-admin").get(isAdmin, allOrderControllers.getRecentOrdersOfAdmin);
 // router.route("/update-order/:orderId").patch( allOrderControllers.updateOrder);
-router.route("/delete-order/:orderId").delete( allOrderControllers.deleteOrder);
-router.route("/process-order/:orderId").put( allOrderControllers.processOrder);
+router.route("/delete-order/:orderId").delete(isAdmin, allOrderControllers.deleteOrder);
+router.route("/process-order/:orderId").put(isAdmin, allOrderControllers.processOrder);
 
 
   

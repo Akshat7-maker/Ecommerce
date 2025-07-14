@@ -4,7 +4,7 @@ import useLoader from "@/customHooks/loader"
 import { useSelector } from "react-redux"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
-
+import { API } from "@/api/api"
 
 export default function UserProfile() {
   const [activeTab, setActiveTab] = useState("orders")
@@ -51,7 +51,7 @@ export default function UserProfile() {
   const getTotalOrders = async() => {
 
     await withLoader(async() => {
-    const {data} = await axios.get(`http://localhost:8000/api/v1/orders/get-recent-orders/${user._id}`)
+    const {data} = await API.get(`orders/get-recent-orders`)
 
     const {data: orders} = data
     console.log(orders)

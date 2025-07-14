@@ -5,13 +5,13 @@ import {ApiError} from "../utils/apiError.js";
 
 const verifyUser = asyncHandler(async (req, res, next) => {
     // console.log("verifyUser",req);
-    const token = req.cookies.accessToken;
+    const token = req.cookies.refreshToken || req.headers.authorization?.split(" ")[1];
 
     if(!token) {
         throw new ApiError(401, "Please login to access this resource")
     }
 
-    const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET );
+    const decodedToken = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
     // console.log("decodedToken",decodedToken);
 
     const user = await User.findById(decodedToken?._id).select("-password -refreshToken");

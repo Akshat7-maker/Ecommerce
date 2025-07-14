@@ -316,6 +316,8 @@ const getAllProducts = asyncHandler(async (req, res, next) => {
 const filterProducts = asyncHandler(async (req, res, next) => {
   const { pricesort, page = 1, limit = 5, category } = req.query;
 
+  console.log(pricesort, page, limit, category)
+
   // Initialize the query and sort options
   const query = category? { category } : {};
   const sort = pricesort === "asc" ? { price: 1 } : pricesort === "desc" ? { price: -1 } : {};

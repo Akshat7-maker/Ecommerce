@@ -23,7 +23,7 @@ export default function SignUp() {
   }
 
   const handleFileChange = (e) => {
-    // console.log(e.target.files) 
+    console.log(e.target.files) 
     const file = e.target.files[0]
     setCoverPic(file)
   }

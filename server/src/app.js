@@ -1,13 +1,16 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import path from "path"
 
 const app = express();
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: ["http://localhost:8000", "http://localhost:5173"],
     credentials: true  // allows cookies to be sent
 }))
+
+const _dirname = path.resolve();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -33,5 +36,11 @@ app.use("/api/v1/cart", cartRouter);
 app.use("/api/v1/coupons", couponRouter);
 app.use("/api/v1/payments", paymentRouter);
 app.use("/api/v1/stats", statsRouter);
+
+
+app.use(express.static(path.join(_dirname, "./client/dist")))
+app.get("*", (_, res) => {
+    res.sendFile(path.join(_dirname, "client", "dist", "index.html"))
+})
 
 export default app

@@ -4,6 +4,7 @@ import axios from "axios";
 import useLoader from "@/customHooks/loader";
 import BarChart from "./AdminDashboardUi.jsx/Charts";
 import { DoughnutChart } from "./AdminDashboardUi.jsx/Charts";
+import { API } from "@/api/api";
 
 function AdminDashboard() {
   const [stats, setStats] = useState({});
@@ -36,8 +37,8 @@ function AdminDashboard() {
   // call api to get dashboard stats
   const getDashboardStats = async () => {
     await withLoader(async () => {
-      const { data } = await axios.get(
-        "http://localhost:8000/api/v1/stats/get-all-stats"
+      const { data } = await API.get(
+        "stats/get-all-stats"
       );
       // console.log(data);
       if (!data) {
@@ -50,7 +51,7 @@ function AdminDashboard() {
 
   const getRecentOrders = async () => {
     await withLoader(async () => {
-      const { data } = await axios.get("http://localhost:8000/api/v1/orders/get-recent-orders-of-admin");
+      const { data } = await API.get("orders/get-recent-orders-of-admin");
       // console.log(data);
       if (!data) {
         return;
