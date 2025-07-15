@@ -128,7 +128,7 @@ function AllProductsPage() {
             className="w-full p-2 rounded-md border border-gray-600 bg-gray-700 text-gray-100 mt-3 "
           >
             <option value="">Select Category</option>
-            {getCategories?.map((category) => {
+            {Array.isArray(getCategories) && getCategories.map((category) => {
               return (
                 <option key={category} value={category}>
                   {category}
@@ -151,7 +151,7 @@ function AllProductsPage() {
 
         {/* cards */}
         <div className="grid grid-cols-3 gap-4">
-          {products?.map((product) => {
+          {Array.isArray(products) && products.map((product) => {
             return (
               <div
                 key={product.name}
@@ -210,7 +210,7 @@ function AllProductsPage() {
                       Add to Cart
                     </button>
                   </div>
-                </div>
+                
               </div>
             );
           })}

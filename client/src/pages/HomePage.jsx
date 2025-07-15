@@ -113,7 +113,7 @@ function HomePage() {
 
       {/* product grid */}
       <ProductGrid>
-        {products.map((product) => (
+        {Array.isArray(products) && products.map((product) => (
           <ProductItem key={product._id} product={product} />
         ))}
       </ProductGrid>
