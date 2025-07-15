@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const API = axios.create({
     baseURL:"https://ecommerce-k2yn.onrender.com",
+    // baseURL:"http://localhost:8000",
     withCredentials: true
 });
 
@@ -18,7 +19,7 @@ const setAuthHeader = (token) => {
 // user login
 const login = async (email, password) => {
     try {
-        const {data} = await API.post("/users/login", {email, password});
+        const {data} = await API.post("/api/v1/users/login", {email, password});
 
         const {data:user} = data
 
@@ -43,7 +44,7 @@ const register = async (name, email, password,gender, coverPic) => {
         formData.append("gender", gender);
         formData.append("coverPic", coverPic);
         // console.log({name, email, password,gender, coverPic});
-        const {data} = await API.post("/users/register", formData);
+        const {data} = await API.post("/api/v1/users/register", formData);
 
         const {data:user} = data
         return user;
@@ -57,7 +58,7 @@ const register = async (name, email, password,gender, coverPic) => {
 const getAllProducts = async () => {
     try {
         console.log("hello");
-        const {data} = await API.get("/products/get-all-products");
+        const {data} = await API.get("/api/v1/products/get-all-products");
         const {data:products} = data
         return products
     } catch (error) {
@@ -69,7 +70,7 @@ const getAllProducts = async () => {
 
 const getLatestProducts = async () => {
     try {
-        const {data} = await API.get("/products/get-latest-products");
+        const {data} = await API.get("/api/v1/products/get-latest-products");
         const {data:products} = data
         return products
     } catch (error) {
@@ -80,7 +81,7 @@ const getLatestProducts = async () => {
 
 const getProductById = async (id) => {
     try {
-        const {data} = await API.get(`/products/${id}`);
+        const {data} = await API.get(`/api/v1/products/${id}`);
         const {data:product} = data
         return product
     } catch (error) {
@@ -91,7 +92,7 @@ const getProductById = async (id) => {
 // get all reviews
 const getAllReviews = async (id) => {
     try {
-        const {data} = await API.get(`/reviews/get-all-reviews/${id}`);
+        const {data} = await API.get(`/api/v1/reviews/get-all-reviews/${id}`);
         const {data:reviews} = data
         return reviews
     } catch (error) {
@@ -103,7 +104,7 @@ const getAllReviews = async (id) => {
 
 const getUserReview = async (productId) => {
     try {
-        const {data} = await API.get(`/reviews/get-review-of-user/${productId}`);
+        const {data} = await API.get(`/api/v1/reviews/get-review-of-user/${productId}`);
         const {data:review} = data
         return review
     } catch (error) {
@@ -114,7 +115,7 @@ const getUserReview = async (productId) => {
 // create review
 const createReview = async (productId, rating, comment) => {
     try {
-        const {data} = await API.post(`/reviews/create-review/${productId}`, {rating, comment});
+        const {data} = await API.post(`/api/v1/reviews/create-review/${productId}`, {rating, comment});
         const {data:review} = data
         return review
     } catch (error) {
@@ -125,7 +126,7 @@ const createReview = async (productId, rating, comment) => {
 // update review
 const updateReview = async (reviewId, rating, comment) => {
     try {
-        const {data} = await API.put(`/reviews/update-review/${reviewId}`, {rating, comment});
+        const {data} = await API.put(`/api/v1/reviews/update-review/${reviewId}`, {rating, comment});
         const {data:review} = data
         return review
     } catch (error) {
@@ -136,7 +137,7 @@ const updateReview = async (reviewId, rating, comment) => {
 // delete review
 const deleteReview = async (reviewId) => {
     try {
-        const {data} = await API.delete(`/reviews/delete-review/${reviewId}`);
+        const {data} = await API.delete(`/api/v1/reviews/delete-review/${reviewId}`);
         const {data:review} = data
         return review
     } catch (error) {
@@ -146,7 +147,7 @@ const deleteReview = async (reviewId) => {
 
 const getAllOrders = async (page, limit) => {
     try {
-        const {data} = await API.get(`/orders/my-order/`,
+        const {data} = await API.get(`/api/v1/orders/my-order/`,
         {
             params: {
                 page: page,
@@ -165,7 +166,7 @@ const getAllOrders = async (page, limit) => {
 const getOrderById = async (orderId) => {
     console.log("orderId",orderId);
     try {
-        const {data} = await API.get(`/orders/get-order/${orderId}`);
+        const {data} = await API.get(`/api/v1/orders/get-order/${orderId}`);
         console.log("order-data",data);
         const {data:order} = data
         return order
@@ -178,7 +179,7 @@ const getOrderById = async (orderId) => {
 
 const getAllOrdersOfAdmin = async () => {
     try {
-        const {data} = await API.get(`/orders/get-all-orders-of-admin`);
+        const {data} = await API.get(`/api/v1/orders/get-all-orders-of-admin`);
         const {data:orders} = data
         return orders
     } catch (error) {
@@ -189,7 +190,7 @@ const getAllOrdersOfAdmin = async () => {
 // get cart
 const getCart = async () => {
     try {
-        const {data} = await API.get("/cart/get-cart");
+        const {data} = await API.get("/api/v1/cart/get-cart");
         const {data:cart} = data
         // console.log("cart",cart);
         return cart
@@ -201,7 +202,7 @@ const getCart = async () => {
 // reset cart
 const resetCart = async () => {
     try {
-        const {data} = await API.delete("/cart/reset-cart");
+        const {data} = await API.delete("/api/v1/cart/reset-cart");
         const {data:cart} = data
         return cart
     } catch (error) {
@@ -212,7 +213,7 @@ const resetCart = async () => {
 // add to cart
 const addToCart = async ( productId, quantity=1) => {
     try {
-        const {data} = await API.post(`/cart/add-to-cart`, {productId, quantity});
+        const {data} = await API.post(`/api/v1/cart/add-to-cart`, {productId, quantity});
         const {data:cart} = data
         return cart
     } catch (error) {
@@ -223,7 +224,7 @@ const addToCart = async ( productId, quantity=1) => {
 // delete from cart
 const deleteFromCart = async (productId) => {
     try {
-        const {data} = await API.delete(`/cart/delete-from-cart/${productId}`);
+        const {data} = await API.delete(`/api/v1/cart/delete-from-cart/${productId}`);
         const {data:cart} = data
         return cart
     } catch (error) {
@@ -234,7 +235,7 @@ const deleteFromCart = async (productId) => {
 // remove from cart
 const removeFromCart = async (productId) => {
     try {
-        const {data} = await API.patch(`/cart/remove-from-cart/${productId}`);
+        const {data} = await API.patch(`/api/v1/cart/remove-from-cart/${productId}`);
         const {data:cart} = data
         return cart
     } catch (error) {

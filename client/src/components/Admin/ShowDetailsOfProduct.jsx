@@ -27,7 +27,7 @@ function ShowDetailsOfProduct() {
   const onDelete = async (id) => {
     await withLoader(async () => {
       const deleted = await API.delete(
-        `products/${id}`
+        `/api/v1/products/${id}`
       );
       console.log("deleted", deleted);
 

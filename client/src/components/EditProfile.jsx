@@ -55,7 +55,7 @@ export default function EditProfile() {
     
     try {
         setError('')
-      const {data} = await API.put(`/users/edit-profile/${myuser._id}`, myformData);
+      const {data} = await API.put(`/api/v1/users/edit-profile/${myuser._id}`, myformData);
       const {data:user} = data
       console.log(user)
       if(user) {

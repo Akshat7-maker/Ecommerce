@@ -27,10 +27,10 @@ function AllProductsPage() {
 
   const fetchProducts = async () => {
 
-    let url = `/products/get-all-products?page=${page}&limit=5`;
+    let url = `/api/v1/products/get-all-products?page=${page}&limit=5`;
 
     if (priceSort || category) {
-      url = `/products/get-filter-products?pricesort=${priceSort}&category=${category}&page=${page}&limit=5`;
+      url = `/api/v1/products/get-filter-products?pricesort=${priceSort}&category=${category}&page=${page}&limit=5`;
     }
     const { data } = await API.get(url);
 
@@ -44,7 +44,7 @@ function AllProductsPage() {
   };
 
   const fetchCategories = async () => {
-    const { data } = await API.get("/products/get-categories");
+    const { data } = await API.get("/api/v1/products/get-categories");
     const { data: categories } = data;
     console.log(categories);
     setgetCategories(categories)

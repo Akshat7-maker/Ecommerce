@@ -38,7 +38,7 @@ function AdminDashboard() {
   const getDashboardStats = async () => {
     await withLoader(async () => {
       const { data } = await API.get(
-        "stats/get-all-stats"
+        "/api/v1/stats/get-all-stats"
       );
       // console.log(data);
       if (!data) {
@@ -51,7 +51,7 @@ function AdminDashboard() {
 
   const getRecentOrders = async () => {
     await withLoader(async () => {
-      const { data } = await API.get("orders/get-recent-orders-of-admin");
+      const { data } = await API.get("/api/v1/orders/get-recent-orders-of-admin");
       // console.log(data);
       if (!data) {
         return;

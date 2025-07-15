@@ -96,7 +96,7 @@ export default function PaymentPage() {
 
                   try {
                     // 1. check payment status in backend
-                    const { data } = await API.post('payments/verify-payment', paymentDetails);
+                    const { data } = await API.post('/api/v1/payments/verify-payment', paymentDetails);
                     console.log( "data",data);
                     const { success } = data;
                     console.log("success",success);
@@ -116,7 +116,7 @@ export default function PaymentPage() {
                             paymentStatus : 'completed',
                             user: user._id
                           });
-                        const { data } = await API.post('orders/create-order', {
+                        const { data } = await API.post('/api/v1/orders/create-order', {
                             paymentDetails,
                             shippingInfo,
                             orderItems,

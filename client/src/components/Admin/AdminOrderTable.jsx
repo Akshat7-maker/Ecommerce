@@ -14,7 +14,7 @@ function AdminOrderTable() {
       setError(null);
       setLoading(true);
       const { data } = await API.get(
-        `orders/get-all-orders-of-admin?page=${page}&limit=5`
+        `/api/v1/orders/get-all-orders-of-admin?page=${page}&limit=5`
       );
       const { data: myData } = data;
       // console.log(myData)
@@ -39,7 +39,7 @@ function AdminOrderTable() {
         setError(null);
         setLoading(true);
       const { data } = await API.put(
-        `orders/process-order/${orderId}`
+        `/api/v1/orders/process-order/${orderId}`
       );
       const { data: myData } = data;
       console.log(myData);
@@ -56,7 +56,7 @@ function AdminOrderTable() {
     setLoading(true);
     try {
       const { data } = await API.delete(
-        `orders/delete-order/${orderId}`
+        `/api/v1/orders/delete-order/${orderId}`
       );
       const { data: myData } = data;
       console.log(myData);
