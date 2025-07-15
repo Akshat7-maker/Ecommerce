@@ -6,7 +6,7 @@ import path from "path"
 const app = express();
 
 app.use(cors({
-    origin: ["http://localhost:8000", "http://localhost:5173"],
+    origin: ["http://localhost:8000", "http://localhost:5173","https://ecommerce-k2yn.onrender.com"],
     credentials: true  // allows cookies to be sent
 }))
 
