@@ -33,12 +33,12 @@ function AdminForm({product}) {
        
        if(!product){
 
-           const res = await axios.post("http://localhost:8000/api/v1/products/create-product", formData);
+           const res = await API.post("/products/create-product", formData);
            //  console.log(res);
            toast.success("Product added successfully");
            navigate("/admin-panel/products")
        }else{
-           const res = await axios.put(`http://localhost:8000/api/v1/products/${product._id}`, formData,
+           const res = await API.put(`/products/${product._id}`, formData,
             {
                 headers: {
                   "Content-Type": "multipart/form-data",

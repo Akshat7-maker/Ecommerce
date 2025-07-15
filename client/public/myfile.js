@@ -12,7 +12,7 @@ function App() {
 
     try {
       // 1.create order in backend
-      const { data } = await axios.post('http://localhost:8000/api/v1/payments/create-order', {
+      const { data } = await axios.post('https://ecommerce-k2yn.onrender.com/api/v1/payments/create-order', {
         amount: 1000,
         currency: 'INR',
 
@@ -28,7 +28,7 @@ function App() {
         name: "e-commerce",
         description: "Test payment",
         order_id: order.id,
-        callback_url: "http://localhost:8000/api/v1/payments/verify-payment",
+        callback_url: "https://ecommerce-k2yn.onrender.com/api/v1/payments/verify-payment",
         // handler: (response)=>{
         //    // This function executes when the payment is successful
         //    alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);

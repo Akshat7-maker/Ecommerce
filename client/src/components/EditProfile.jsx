@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import api from '../api/api' 
+import { API } from '../api/api'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
@@ -54,7 +55,7 @@ export default function EditProfile() {
     
     try {
         setError('')
-      const {data} = await axios.put(`http://localhost:8000/api/v1/users/edit-profile/${myuser._id}`, myformData);
+      const {data} = await API.put(`/users/edit-profile/${myuser._id}`, myformData);
       const {data:user} = data
       console.log(user)
       if(user) {

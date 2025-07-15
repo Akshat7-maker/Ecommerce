@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../api/api";
+import { API } from "../api/api";
 import ProductGrid from "../components/ProductGrid";
 import ProductItem from "../components/ProductItem";
 import Loader from "../components/Loader";
@@ -49,7 +50,7 @@ function HomePage() {
 
   const getCategories = async () => {
     try {
-      const { data } = await axios("http://localhost:8000/api/v1/products/get-categories");
+      const { data } = await API.get("/products/get-categories");
       const { data: categories } = data;
       console.log(categories);
       setCategories(categories)
