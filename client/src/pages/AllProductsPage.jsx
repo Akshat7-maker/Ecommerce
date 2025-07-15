@@ -151,14 +151,13 @@ function AllProductsPage() {
 
         {/* cards */}
         <div className="grid grid-cols-3 gap-4">
-          {Array.isArray(products) && products.map((product) => {
-            return (
-              <div
-                key={product.name}
-                className="group rounded-lg border border-gray-200 bg-white overflow-hidden"
-              >
-                <div className="relative aspect-square">
-                  <Link to={`/product-info/${product?._id}`}>
+          {Array.isArray(products) && products.map((product) => (
+            <div
+              key={product.name}
+              className="group rounded-lg border border-gray-200 bg-white overflow-hidden"
+            >
+              <div className="relative aspect-square">
+                <Link to={`/product-info/${product?._id}`}>
                   <img
                     src={product?.images?.coverPic}
                     alt={product?.description}
@@ -166,54 +165,51 @@ function AllProductsPage() {
                     height={400}
                     className="object-cover transition-transform group-hover:scale-105"
                   />
-                  </Link>
-
-                  {product.badge && (
-                    <span className="absolute right-2 top-2 rounded-full bg-red-500 px-2 py-0.5 text-xs font-medium text-white">
-                      {product.badge}
-                    </span>
-                  )}
-                </div>
-                <div className="p-4 space-y-2">
-                  <h3 className="font-semibold truncate">{product.name}</h3>
-                  <div className="flex items-center gap-2">
-                    <div className="flex items-center">
-                      <Stack spacing={1}>
-                        <Rating
-                          name="half-rating-read"
-                          defaultValue={product?.avgRating}
-                          precision={0.5}
-                          readOnly
-                        />
-                      </Stack>
-                    </div>
-                    <span className="text-sm text-gray-500">
-                      ({product?.reviewCount})
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between pt-2">
-                    <div className="flex flex-col">
-                      <span className="font-bold text-xl">
-                      ₹{product?.price}
-                      </span>
-                      {product.oldPrice && (
-                        <span className="text-sm text-gray-500 line-through">
-                          ₹{product?.oldPrice || 0}
-                        </span>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => addToCart(product)}
-                      className="rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                
+                </Link>
+                {product.badge && (
+                  <span className="absolute right-2 top-2 rounded-full bg-red-500 px-2 py-0.5 text-xs font-medium text-white">
+                    {product.badge}
+                  </span>
+                )}
               </div>
-            );
-          })}
+              <div className="p-4 space-y-2">
+                <h3 className="font-semibold truncate">{product.name}</h3>
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center">
+                    <Stack spacing={1}>
+                      <Rating
+                        name="half-rating-read"
+                        defaultValue={product?.avgRating}
+                        precision={0.5}
+                        readOnly
+                      />
+                    </Stack>
+                  </div>
+                  <span className="text-sm text-gray-500">
+                    ({product?.reviewCount})
+                  </span>
+                </div>
+                <div className="flex items-center justify-between pt-2">
+                  <div className="flex flex-col">
+                    <span className="font-bold text-xl">
+                      ₹{product?.price}
+                    </span>
+                    {product.oldPrice && (
+                      <span className="text-sm text-gray-500 line-through">
+                        ₹{product?.oldPrice || 0}
+                      </span>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => addToCart(product)}
+                    className="rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* pagination */}
