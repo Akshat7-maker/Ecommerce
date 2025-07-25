@@ -13,7 +13,7 @@ function AdminCharts() {
 
     const getData = async () => {
         await withLoader(async () => {
-            const { data } = await API.get('stats/get-pie-chart-data')
+            const { data } = await API.get('/api/v1/stats/get-pie-chart-data')
             const { data: pieData } = data
             setPieChart(pieData)
         })
