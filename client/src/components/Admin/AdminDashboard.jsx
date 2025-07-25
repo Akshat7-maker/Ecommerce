@@ -72,22 +72,22 @@ function AdminDashboard() {
     {
       heading: "Users",
       count: stats?.count?.users,
-      percentage: stats?.changePercentage?.user,
+      percentage: stats?.changePercentage?.user || 0,
     },
     {
       heading: "Orders",
       count: stats?.count?.orders,
-      percentage: stats?.changePercentage?.order,
+      percentage: stats?.changePercentage?.order || 0,
     },
     {
       heading: "Products",
       count: stats?.count?.products,
-      percentage: stats?.changePercentage?.product,
+      percentage: stats?.changePercentage?.product || 0,
     },
     {
       heading: "Revenue",
       count: stats?.count?.revenue,
-      percentage: stats?.changePercentage?.revenue,
+      percentage: stats?.changePercentage?.revenue || 0,
     },
   ];
 
