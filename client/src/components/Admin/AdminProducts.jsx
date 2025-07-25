@@ -6,7 +6,7 @@ import api, { API } from "../../api/api";
 import useLoader from "@/customHooks/loader";
 import AdminProductItem from "./AdminProductItem";
 import axios from "axios";
-import { s } from "vite/dist/node/types.d-aGj9QkWt";
+
 
 function AdminProducts() {
   const [products, setProducts] = useState([]);
