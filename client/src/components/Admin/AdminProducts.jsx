@@ -29,7 +29,7 @@ function AdminProducts() {
   // }
 
   const fetchProducts = async () => {
-    setLoading(true);
+    setLoading(true)
     let url = `/api/v1/products/get-all-products?page=${page}&limit=4`;
 
     const { data } = await API.get(url);
