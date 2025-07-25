@@ -6,10 +6,13 @@ import api, { API } from "../../api/api";
 import useLoader from "@/customHooks/loader";
 import AdminProductItem from "./AdminProductItem";
 import axios from "axios";
+import { s } from "vite/dist/node/types.d-aGj9QkWt";
 
 function AdminProducts() {
   const [products, setProducts] = useState([]);
-  const { loading, error, withLoader } = useLoader();
+  // const { loading, error, withLoader } = useLoader();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
@@ -26,6 +29,7 @@ function AdminProducts() {
   // }
 
   const fetchProducts = async () => {
+    setLoading(true);
     let url = `/api/v1/products/get-all-products?page=${page}&limit=4`;
 
     const { data } = await API.get(url);
@@ -37,6 +41,7 @@ function AdminProducts() {
     setTotalPages(products.totalPages);
     setTotalProducts(products.totalProducts);
     setProductsShowing(products.productsShowing);
+    setLoading(false);
   };
 
   useEffect(() => {

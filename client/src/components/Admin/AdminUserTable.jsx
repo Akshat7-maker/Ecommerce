@@ -9,7 +9,7 @@ function AdminUserTable() {
 
     const fetchUsers = async () => {
         await withLoader(async () => {
-            const {data} = await API.get('users/get-all-users');
+            const {data} = await API.get('/api/v1/users/get-all-users');
             const {data:users} = data
             setUsers(users)
         });
