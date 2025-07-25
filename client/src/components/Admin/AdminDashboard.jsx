@@ -97,7 +97,7 @@ function AdminDashboard() {
       {cardData?.map((item, index) => (
         <div key={index} className="col-span-3">
           <Card
-           {...item}
+           {...item, loading}
           />
         </div>
       ))}

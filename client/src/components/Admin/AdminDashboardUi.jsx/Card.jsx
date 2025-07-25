@@ -3,7 +3,7 @@ import CircleProgress from "./CircularProgess";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
 
-function Card({ heading, count, percentage }) {
+function Card({ heading, count, percentage, loading }) {
   return (
     <div className="bg-white rounded-lg shadow-md p-4 flex justify-around">
       {/* left side */}
