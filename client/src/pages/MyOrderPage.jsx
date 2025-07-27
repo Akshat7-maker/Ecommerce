@@ -73,7 +73,7 @@ export default function MyOrderPage() {
           <p className="text-gray-600">You haven't placed any orders yet.</p>
         ) : (
           <div className="space-y-6">
-            {orders.map((order) => (
+            {orders?.map((order) => (
               <div
                 key={order._id}
                 className="bg-white rounded-lg shadow-md overflow-hidden"

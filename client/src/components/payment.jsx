@@ -70,7 +70,7 @@ export default function PaymentPage() {
         // Handle payment logic here
         try {
             // create order in backend
-            const { data } = await API.post('payments/create-order', {
+            const { data } = await API.post('/api/v1/payments/create-order', {
                 amount: totalAmount,
                 currency: 'INR',
             })

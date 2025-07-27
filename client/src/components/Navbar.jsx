@@ -80,7 +80,7 @@ function Navbar() {
           </button>
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 ">
-              {userItems.map(
+              {userItems?.map(
                 (item, index) =>
                   item.active && (
                     <Link to={item.to} key={index}>

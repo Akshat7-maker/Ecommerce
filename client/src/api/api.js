@@ -4,6 +4,7 @@ import axios from "axios";
 export const API = axios.create({
     baseURL:"https://ecommerce-k2yn.onrender.com",
     // baseURL:"http://localhost:8000",
+    // baseURL:"http://localhost:5173",
     withCredentials: true
 });
 

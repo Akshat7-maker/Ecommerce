@@ -150,7 +150,7 @@ function CartPage() {
         <div className=" h-screen">
           <h1 className="text-3xl font-bold">Your Cart</h1>
           <div className="">
-            {cart.cartItems.map((item) => (
+            {cart?.cartItems?.map((item) => (
               <CartItem
                 cartitem={item}
                 addToCart={addToCart}

@@ -259,7 +259,7 @@ export default function SingleProductInfo() {
         <div className="mt-12">
           <h2 className="text-2xl font-bold mb-4">User Reviews</h2>
           {reviews.length > 0 ? (
-            reviews.map((review, index) => (
+            reviews?.map((review, index) => (
               <div
                 key={review._id || index}
                 className="border rounded-lg p-4 mb-4 shadow-sm bg-gray-50"

@@ -113,10 +113,12 @@ function HomePage() {
 
       {/* product grid */}
       <ProductGrid>
-        {Array.isArray(products) && products.map((product) => (
+        {Array.isArray(products) && products?.map((product) => (
           <ProductItem key={product._id} product={product} />
         ))}
       </ProductGrid>
+
+
 
       {/* categories */}
       {/* <section className="py-12 md:py-24 bg-gray-50">

@@ -8,7 +8,7 @@ const OrdersList = ({ orders }) => {
       </h1>
 
       <div className="space-y-8">
-        {orders.map((order) => (
+        {orders?.map((order) => (
           <div
             key={order._id}
             className="order-card bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl"

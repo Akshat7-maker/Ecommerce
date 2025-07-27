@@ -148,7 +148,7 @@ export default function UserProfile() {
 
         {/* Tabs */}
         <div className="mb-6 flex space-x-4 border-b border-gray-200">
-          {["orders"].map((tab) => (
+          {["orders"]?.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}

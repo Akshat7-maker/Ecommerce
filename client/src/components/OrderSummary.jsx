@@ -103,7 +103,7 @@ export default function OrderSummary() {
           <div className="border-t border-gray-200 pt-4">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Purchased Items</h3>
             <div className="space-y-4">
-              {orderData.orderItems.map((item) => (
+              {orderData.orderItems?.map((item) => (
                 <div  className="flex items-center justify-between py-2">
                   <div className="flex items-center">
                     <img src={item.productId?.images?.coverPic|| ""} alt={item.name} className="w-12 h-12 object-cover rounded mr-4" />
